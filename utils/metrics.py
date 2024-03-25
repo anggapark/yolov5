@@ -207,7 +207,7 @@ class ConfusionMatrix:
                 array,
                 ax=ax,
                 annot=nc < 30,
-                annot_kws={"size": 8},
+                annot_kws={"size": 25},
                 cmap="Blues",
                 fmt=".2f",
                 square=True,

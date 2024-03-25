@@ -29,14 +29,14 @@ class Albumentations:
             check_version(A.__version__, "1.0.3", hard=True)  # version requirement
 
             T = [
-                A.RandomResizedCrop(height=size, width=size, scale=(0.8, 1.0), ratio=(0.9, 1.11), p=0.0),
-                A.Blur(p=0.01),
-                A.MedianBlur(p=0.01),
-                A.ToGray(p=0.01),
-                A.CLAHE(p=0.01),
-                A.RandomBrightnessContrast(p=0.0),
-                A.RandomGamma(p=0.0),
-                A.ImageCompression(quality_lower=75, p=0.0),
+                A.Blur(p=0.4),
+                A.MotionBlur(p=0.1),
+                A.RandomRotate90(p=0.4),
+                A.HorizontalFlip(p=0.4),
+                A.VerticalFlip(p=0.4),
+                A.RandomBrightnessContrast(
+                    brightness_limit=0.2, contrast_limit=0.2, p=0.4
+                ),
             ]  # transforms
             self.transform = A.Compose(T, bbox_params=A.BboxParams(format="yolo", label_fields=["class_labels"]))
 
