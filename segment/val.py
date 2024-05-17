@@ -259,13 +259,18 @@ def run(
     if isinstance(names, (list, tuple)):  # old format
         names = dict(enumerate(names))
     class_map = coco80_to_coco91_class() if is_coco else list(range(1000))
-    s = ("%22s" + "%11s" * 10) % (
+    s = ("%22s" + "%11s" * 15) % (
         "Class",
         "Images",
         "Instances",
         "Box(P",
         "R",
         "mAP50",
+        "mAP55",
+        "mAP60",
+        "mAP65",
+        "mAP70",
+        "mAP75",
         "mAP50-95)",
         "Mask(P",
         "R",
