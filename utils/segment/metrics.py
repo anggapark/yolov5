@@ -80,7 +80,7 @@ class Metric:
             (nc, ) or [].
         """
         return self.all_ap[:, 1] if len(self.all_ap) else []
-    
+
     @property
     def ap60(self):
         """
@@ -90,7 +90,7 @@ class Metric:
             (nc, ) or [].
         """
         return self.all_ap[:, 2] if len(self.all_ap) else []
-    
+
     @property
     def ap65(self):
         """
@@ -100,7 +100,7 @@ class Metric:
             (nc, ) or [].
         """
         return self.all_ap[:, 3] if len(self.all_ap) else []
-    
+
     @property
     def ap70(self):
         """
@@ -110,7 +110,7 @@ class Metric:
             (nc, ) or [].
         """
         return self.all_ap[:, 4] if len(self.all_ap) else []
-    
+
     @property
     def ap75(self):
         """
@@ -158,7 +158,7 @@ class Metric:
             float.
         """
         return self.all_ap[:, 0].mean() if len(self.all_ap) else 0.0
-    
+
     @property
     def map55(self):
         """
@@ -168,7 +168,7 @@ class Metric:
             float.
         """
         return self.all_ap[:, 1].mean() if len(self.all_ap) else 0.0
-    
+
     @property
     def map60(self):
         """
@@ -178,7 +178,7 @@ class Metric:
             float.
         """
         return self.all_ap[:, 2].mean() if len(self.all_ap) else 0.0
-    
+
     @property
     def map65(self):
         """
@@ -188,7 +188,7 @@ class Metric:
             float.
         """
         return self.all_ap[:, 3].mean() if len(self.all_ap) else 0.0
-    
+
     @property
     def map70(self):
         """
@@ -198,7 +198,7 @@ class Metric:
             float.
         """
         return self.all_ap[:, 4].mean() if len(self.all_ap) else 0.0
-    
+
     @property
     def map75(self):
         """
@@ -225,7 +225,17 @@ class Metric:
 
     def class_result(self, i):
         """Class-aware result, return p[i], r[i], ap50[i], ap[i]"""
-        return (self.p[i], self.r[i], self.ap50[i], self.ap55[i], self.ap60[i], self.ap65[i], self.ap70[i], self.ap75[i], self.ap[i])
+        return (
+            self.p[i],
+            self.r[i],
+            self.ap50[i],
+            self.ap55[i],
+            self.ap60[i],
+            self.ap65[i],
+            self.ap70[i],
+            self.ap75[i],
+            self.ap[i],
+        )
 
     def get_maps(self, nc):
         """Calculates and returns mean Average Precision (mAP) for each class given number of classes `nc`."""

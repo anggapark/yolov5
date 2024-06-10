@@ -34,9 +34,7 @@ class Albumentations:
                 A.RandomRotate90(p=0.4),
                 A.HorizontalFlip(p=0.4),
                 A.VerticalFlip(p=0.4),
-                A.RandomBrightnessContrast(
-                    brightness_limit=0.2, contrast_limit=0.2, p=0.4
-                ),
+                A.RandomBrightnessContrast(brightness_limit=0.2, contrast_limit=0.2, p=0.4),
             ]  # transforms
             self.transform = A.Compose(T, bbox_params=A.BboxParams(format="yolo", label_fields=["class_labels"]))
 
