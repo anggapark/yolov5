@@ -29,10 +29,24 @@ def ap_per_class_box_and_mask(
         other arguments see `func: ap_per_class`.
     """
     results_boxes = ap_per_class(
-        tp_b, conf, pred_cls, target_cls, plot=plot, save_dir=save_dir, names=names, prefix="Box"
+        tp_b,
+        conf,
+        pred_cls,
+        target_cls,
+        plot=plot,
+        save_dir=save_dir,
+        names=names,
+        prefix="Box",
     )[2:]
     results_masks = ap_per_class(
-        tp_m, conf, pred_cls, target_cls, plot=plot, save_dir=save_dir, names=names, prefix="Mask"
+        tp_m,
+        conf,
+        pred_cls,
+        target_cls,
+        plot=plot,
+        save_dir=save_dir,
+        names=names,
+        prefix="Mask",
     )[2:]
 
     return {
@@ -120,6 +134,46 @@ class Metric:
             (nc, ) or [].
         """
         return self.all_ap[:, 5] if len(self.all_ap) else []
+
+    @property
+    def ap80(self):
+        """
+        AP@0.5 of all classes.
+
+        Return:
+            (nc, ) or [].
+        """
+        return self.all_ap[:, 6] if len(self.all_ap) else []
+
+    @property
+    def ap85(self):
+        """
+        AP@0.5 of all classes.
+
+        Return:
+            (nc, ) or [].
+        """
+        return self.all_ap[:, 7] if len(self.all_ap) else []
+
+    @property
+    def ap90(self):
+        """
+        AP@0.5 of all classes.
+
+        Return:
+            (nc, ) or [].
+        """
+        return self.all_ap[:, 8] if len(self.all_ap) else []
+
+    @property
+    def ap95(self):
+        """
+        AP@0.5 of all classes.
+
+        Return:
+            (nc, ) or [].
+        """
+        return self.all_ap[:, 9] if len(self.all_ap) else []
 
     @property
     def ap(self):
@@ -210,6 +264,46 @@ class Metric:
         return self.all_ap[:, 5].mean() if len(self.all_ap) else 0.0
 
     @property
+    def map80(self):
+        """
+        Mean AP@0.8 of all classes.
+
+        Return:
+            float.
+        """
+        return self.all_ap[:, 6].mean() if len(self.all_ap) else 0.0
+
+    @property
+    def map85(self):
+        """
+        Mean AP@0.85 of all classes.
+
+        Return:
+            float.
+        """
+        return self.all_ap[:, 7].mean() if len(self.all_ap) else 0.0
+
+    @property
+    def map90(self):
+        """
+        Mean AP@0.9 of all classes.
+
+        Return:
+            float.
+        """
+        return self.all_ap[:, 8].mean() if len(self.all_ap) else 0.0
+
+    @property
+    def map95(self):
+        """
+        Mean AP@0.95 of all classes.
+
+        Return:
+            float.
+        """
+        return self.all_ap[:, 9].mean() if len(self.all_ap) else 0.0
+
+    @property
     def map(self):
         """
         Mean AP@0.5:0.95 of all classes.
@@ -221,7 +315,21 @@ class Metric:
 
     def mean_results(self):
         """Mean of results, return mp, mr, map50, map."""
-        return (self.mp, self.mr, self.map50, self.map55, self.map60, self.map65, self.map70, self.map75, self.map)
+        return (
+            self.mp,
+            self.mr,
+            self.map50,
+            self.map55,
+            self.map60,
+            self.map65,
+            self.map70,
+            self.map75,
+            self.map80,
+            self.map85,
+            self.map90,
+            self.map95,
+            self.map,
+        )
 
     def class_result(self, i):
         """Class-aware result, return p[i], r[i], ap50[i], ap[i]"""
@@ -234,6 +342,10 @@ class Metric:
             self.ap65[i],
             self.ap70[i],
             self.ap75[i],
+            self.ap80[i],
+            self.ap85[i],
+            self.ap90[i],
+            self.ap95[i],
             self.ap[i],
         )
 
